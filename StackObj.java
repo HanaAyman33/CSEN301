@@ -1,5 +1,4 @@
-package Assignment5;
-
+package Assignment6;
 public class StackObj
 {
 	private Object[] theStack;

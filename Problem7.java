@@ -1,25 +1,57 @@
-package Assignment7;
-public class Problem7{
+package Assignment8;
+public class Problem7 {
 	public static void main(String[] args) {
-		LinkList a = new LinkList();
+		DoublyLinkedList a = new DoublyLinkedList();
 		a.insertLast(1);
-		a.insertLast(2);
-		a.insertLast(3);
-		a.insertLast(4);
-		a.insertLast(5);
-		a.insertLast(6);
-		a.insertLast(7);
-		System.out.println(a.toString());
-		add(a);
-		System.out.println(a.toString());
-	}
-	public static void add(LinkList a) {
-		LinkList tmp = new LinkList();
+		a.insertLast(1);
+		a.insertLast(1);
+		a.insertLast(1);
+		a.displayForward();
+		System.out.println();
+	}//Problem7 f
+	public static DoublyLinkedList insertionSort(DoublyLinkedList a) {
+		DoublyLinkedList res = new DoublyLinkedList();
 		while(!a.isEmpty()) {
-			int x = (Integer)a.removeFirst() + 1;
-			tmp.insertLast(x);
+			if(res.isEmpty())
+				res.insertFirst(a.removeFirst());
+			else {
+				Object tmpVal = a.removeFirst();
+				DoublyLinkedList tmp = new DoublyLinkedList();
+				boolean added = false;
+				while(!added) {
+					if(res.isEmpty()) {
+						res.insertFirst(tmpVal);
+						added = true;
+						break;
+					}
+					else {
+						Comparable remove = (Comparable) res.removeFirst();
+						if(remove.compareTo(tmpVal)<0)
+							tmp.insertLast(remove);
+						else {
+							res.insertFirst(remove);
+							res.insertFirst(tmpVal);
+							added = true;
+						}
+					}
+				}
+				while(!tmp.isEmpty())
+					res.insertFirst(tmp.removeFirst());
+			}
+		}
+		return res;
+	}
+
+	//Problem7 k
+	public static int count(DoublyLinkedList a) {
+		DoublyLinkedList tmp = new DoublyLinkedList();
+		int cnt = 0;
+		while(!a.isEmpty()) {
+			cnt++;
+			tmp.insertLast(a.removeFirst());
 		}
 		while(!tmp.isEmpty())
 			a.insertLast(tmp.removeFirst());
+		return cnt;
 	}
 }
